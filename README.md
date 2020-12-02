@@ -16,6 +16,7 @@
     d)  make -f Makefile.pcie -j4
   
     e)  ./face_test face_1080p.jpg ./
+        
         bmodel路径传到face_detection.bmodel的上一级
   
     f） 结束后可以在文件夹内看到result.jpg 的结果图片
