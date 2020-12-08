@@ -116,11 +116,25 @@ void FaceDetection::postprocess(vector<vector<stFaceRect> >& results) {
     float *preds[output_num_];
     vector<stFaceRect> det_result;
     results.push_back(det_result);
+
     for (int j = 0; j < output_num_; j++) {
-      preds[j] = reinterpret_cast<float*>(outputs_[j]) + output_sizes_[j] * i;
+      if (BM_FLOAT32 == net_info_->output_dtypes[j]) {
+        preds[j] = reinterpret_cast<float*>(outputs_[j]) + output_sizes_[j] * i;
+      } else {
+        char* int8_ptr = reinterpret_cast<char*>(outputs_[j]) + output_sizes_[j] * i;
+        preds[j] = new float[output_sizes_[j]];
+        for (int k = 0; k < output_sizes_[j]; k++) {
+          preds[j][k] = int8_ptr[k] * net_info_->output_scales[j];
+        }
+      }
     }
     post_process_->run(*net_info_, preds,
                   results[i], max_face_count_, score_threshold_);
+    for (int j = 0; j < output_num_; j++) {
+      if (BM_FLOAT32 != net_info_->output_dtypes[j]) {
+        delete []preds[j];
+      }
+    }
   }
   return;
 }
