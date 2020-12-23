@@ -13,11 +13,15 @@
 
     c)  cd BMRetinaFaceDemo
   
-    d)  如果是SC5+板卡 : make -f Makefile.pcie -j4
+    d)  编译程序
+    
+        如果是SC5+板卡 : make -f Makefile.pcie -j4
     
         如果是SE5或SM5 : make -f Makefile.arm -j4
   
-    e)  如果是图片模式， ./face_test 0 imagelist.txt face_detection_fp32.bmodel
+    e)  运行程序
+        
+        如果是图片模式， ./face_test 0 imagelist.txt face_detection_fp32.bmodel
         
         如果是视频模式， ./face_test 1 videolist.txt face_detection_int8_b4.bmodel
         
