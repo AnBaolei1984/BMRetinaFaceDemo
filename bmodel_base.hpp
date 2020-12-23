@@ -21,7 +21,7 @@ public:
   BmodelBase(const std::string bmodel, int device_id){};
   ~BmodelBase();
   bm_handle_t get_bm_handle();
-  int batch_size() {return batch_size_;};
+  int batch_size();
 
 protected:
   void forward();

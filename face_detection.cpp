@@ -13,8 +13,8 @@
 using namespace std;
 using namespace cv;
 
-FaceDetection::FaceDetection(const std::string bmodel, int device_id) {
-  bmodel_path_ = bmodel + "/face_detection.bmodel";
+FaceDetection::FaceDetection(const std::string bmodel_path, int device_id) {
+  bmodel_path_ = bmodel_path;
   device_id_ = device_id;
   load_model();
 
@@ -51,7 +51,7 @@ bool FaceDetection::run(vector<Mat>& input_imgs,
   }
   std::vector<bm_image> processed_imgs;
   preprocess(input_bm_imgs, processed_imgs);
-  assert((input_imgs.size() == batch_size_));
+  assert(static_cast<int>(input_imgs.size()) == batch_size_);
   bmcv_image_convert_to(bm_handle_, batch_size_,
              convert_attr_, &processed_imgs[0], scaled_inputs_);
   forward();
@@ -112,7 +112,7 @@ void FaceDetection::preprocess(const std::vector<bm_image>& input_imgs,
 }
 
 void FaceDetection::postprocess(vector<vector<stFaceRect> >& results) {
-  for (size_t i = 0; i < batch_size_; i++) {
+  for (int i = 0; i < batch_size_; i++) {
     float *preds[output_num_];
     vector<stFaceRect> det_result;
     results.push_back(det_result);

@@ -437,8 +437,8 @@ void RetinaFacePostProcess::run(
   }
   faceInfo = nms(faceInfo, nms_threshold);
   int face_num = 
-       max_face_count > faceInfo.size() ? faceInfo.size() : max_face_count;
-  for (size_t i = 0; i < face_num; i++) {
+       max_face_count > static_cast<int>(faceInfo.size()) ? static_cast<int>(faceInfo.size()) : max_face_count;
+  for (int i = 0; i < face_num; i++) {
     stFaceRect det_result;
     det_result.left = faceInfo[i].rect.x1;
     det_result.right = faceInfo[i].rect.x2;

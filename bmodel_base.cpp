@@ -85,3 +85,7 @@ void BmodelBase::load_model() {
   scaled_inputs_ = new bm_image[batch_size_];
   return;
 }
+
+int BmodelBase::batch_size() {
+  return batch_size_;
+};
