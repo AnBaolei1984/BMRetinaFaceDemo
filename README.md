@@ -27,8 +27,9 @@
         
         * 1 imagelist.txt的每一行是图片的路径
         * 2 videolist.txt的每一行是一个mp4视频路径或者一个rtsp url
-        * 3 如果模型是多batch的，那么图片模式，会每攒够batch数的图片做一次推理。视频模式，要求videolist.txt的视频数和模型的batch数相等。
-            当然也可以按着自己需求的逻辑来修改。只是demo里这样写的。
+        * 3 如果模型是多batch的，那么图片模式，会每攒够batch数的图片做一次推理。视频模式，
+            要求videolist.txt的视频数和模型的batch数相等。当然也可以按着自己需求的逻辑来
+            修改。只是demo里这样写的。
   
     f） 结束后可以在当前目录生成一个名为result_imgs的文件夹，里面可以看到结果图片
  
